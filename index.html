@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/fontawesome_5_15_3.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="js/jquery_min_3_6_0.js" defer></script>
+    <script src="js/main.js" type="module" defer></script>
+    <title>JQ Calendar</title>
+</head>
+<body>
+    <main>
+        <header class="header">
+            <div class="weekControls">
+                <span id="prevWeekBtn">&#9198;</span>
+                    <span class="weekDisplay">
+                        <span id="weekStartDisplay"></span>
+                            -
+                        <span id="weekEndDisplay"></span>
+                    </span>
+                <span id="nextWeekBtn">&#9197;</span>
+            </div>
+            <h1>JS Calendar</h1>
+                <div class="generalControls">
+                    <span id="addBtn">&#43;</span>
+                    <span id="trashBtn">DELETE</span>
+                </div>
+        </header>
+        <section id="calendar">
+            <div class="dayTime">
+
+            </div>
+            <div data-name="Monday" data-dayIndex= "0" class="day"></div>
+            <div data-name="Tuesday" data-dayIndex= "1" class="day"></div>
+            <div data-name="Wednesday" data-dayIndex= "2" class="day"></div>
+            <div data-name="Thursday" data-dayIndex= "3" class="day"></div>
+            <div data-name="Friday" data-dayIndex= "4" class="day"></div>
+            <div data-name="Saturday" data-dayIndex= "5" class="day"></div>
+            <div data-name="Sunday" data-dayIndex= "6" class="day"></div>
+        </section>
+    </main>
+    
+</body>
+</html>
