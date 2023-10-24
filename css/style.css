@@ -49,14 +49,14 @@ textarea {
     font-weight: 400;
 }
 
-.header i {
+.header .icon {
     cursor: pointer;
-    margin: 0px 5px;
+    margin: 0px 10px;
     color: var(--time-color);
     transition: all 80ms linear;
 }
 
-.header i:hover {
+.header .icon:hover {
     color: var(--font-color);
     border-color: var(--font-color);
 }
@@ -74,22 +74,14 @@ textarea {
     right: 20px;
 }
 
-.generalControls i {
+.generalControls .icon {
     line-height: 25px;
+    padding: 5px 10px;
     display: inline-block;
-    width: 30px;
-    height: 30px;
     border: 3px solid var(--time-color);
-    border-radius: 50%;
+    border-radius: 3px;
 }
 
-.generalControls .fa-plus {
-    font-size: 20px;
-}
-
-.generalControls .fa-trash-alt {
-    font-size: 18px;
-}
 
 /* calendar */
 
@@ -107,6 +99,7 @@ textarea {
 /* columns */
 
 .dayTime {
+    line-height: 30px;
     width: 100%;
     min-width: 100px;
     max-width: 100px;
@@ -117,6 +110,7 @@ textarea {
 .day {
     width: 100%;
     min-width: 110px;
+    /* line-height: 40px; */
     border-left: 1px solid var(--grid-color);
 }
 
