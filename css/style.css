@@ -3,7 +3,7 @@
 :root {
     --grid-color: #cecece;
     --time-color: #777;
-    --slot-hover-color: #eee;
+    --slot-hover-color: #999;
     --shadow-color: rgba(0, 0, 0, 0.3);
     --font-color: #eee;
     --color-red: rgb(190, 35, 15);
@@ -128,6 +128,7 @@ textarea {
 
 .day.currentDay .columnHeader {
     background: var(--slot-hover-color);
+    color: var(--color-red)
 }
 
 .dayDisplay {

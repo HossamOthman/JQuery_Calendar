@@ -4,6 +4,7 @@ import { getDayIndex, addDays } from "./helper.js";
     constructor() {
         this.weekStart = null;
         this.weekEnd = null;
+        this.weekOffset = 0;
     }
 
     setup() {
@@ -11,6 +12,7 @@ import { getDayIndex, addDays } from "./helper.js";
         this.setupDays();
         this.calculateCurrentWeek();
         this.showWeek();
+        this.setupControls();
     }
 
     setupTimes() {
@@ -51,10 +53,10 @@ import { getDayIndex, addDays } from "./helper.js";
         console.log('click', hour, dayIndex)
     }
     hoverOver(hour){
-        console.log('hovv', hour)
+        $(`.time[data-hour=${hour}]`).addClass('currentTime');
     }
     hoverOut() {
-        // todo later
+        $(`.time`).removeClass('currentTime');
     }
     calculateCurrentWeek() {
         const now = new Date();
@@ -79,5 +81,32 @@ import { getDayIndex, addDays } from "./helper.js";
             });
             $(`.day[data-dayIndex=${dayIndex}] .dayDisplay`).text(display);
         }
+        if(this.weekOffset == 0){
+            this.showCurrentDay();
+        } else {
+            this.hideCurrentDay();
+        }
+    }
+
+    setupControls() {
+        $('#nextWeekBtn').click(() => this.changeWeek(1));
+        $('#prevWeekBtn').click(() => this.changeWeek(-1));
+    }
+
+    changeWeek(number) {
+        this.weekOffset += number;
+        this.weekStart = addDays(this.weekStart, 7 * number);
+        this.weekEnd = addDays(this.weekStart, 7 * number);
+        this.showWeek();
+    }
+
+    showCurrentDay() {
+        const now = new Date();
+        const dayIndex = getDayIndex(now);
+        $(`.day[data-dayIndex=${dayIndex}]`).addClass('currentDay');
+    }
+
+    hideCurrentDay() {
+        $('.day').removeClass('currentDay');
     }
  }
