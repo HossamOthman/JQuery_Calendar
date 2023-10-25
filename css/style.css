@@ -36,6 +36,7 @@ textarea {
 /* header */
 
 .header {
+    width: 100%;
     text-align: center;
     padding: 20px 10px;
     position: relative;
@@ -319,8 +320,8 @@ textarea {
     background-color: var(--color-orange);
 }
 
-@media (max-width: 800px) {
-    #weekDisplay {
+@media (max-width: 900px) {
+    .weekDisplay {
         display: none;
     }
 }
