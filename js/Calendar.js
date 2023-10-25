@@ -1,10 +1,17 @@
-import { getDayIndex, addDays } from "./helper.js";
+import { getDayIndex, addDays, dateString } from "./helper.js";
+
+const MODE = {
+    VIEW: 1,
+    UPDATE: 2,
+    CREATE: 3,
+    };
 
  export class Calendar {
     constructor() {
         this.weekStart = null;
         this.weekEnd = null;
         this.weekOffset = 0;
+        this.mode = MODE.VIEW;
     }
 
     setup() {
@@ -50,8 +57,24 @@ import { getDayIndex, addDays } from "./helper.js";
         })
     }
     clickSlot(hour, dayIndex) {
-        console.log('click', hour, dayIndex)
+        // console.log('click', hour, dayIndex);
+        if (this.mode != MODE.VIEW ){
+            return;
+        }
+        this.mode = MODE.CREATE;
+        const start = hour.toString().padStart(2, '0') + ':00';
+        const end = hour < 23 ? (hour+1).toString().padStart(2, '0') + ':00' : '23:59' ;
+        const date = dateString(addDays(this.weekStart, dayIndex));
+        const event = {
+            start, end, date, title: '', description: '', color: 'red'
+        };
+        this.openModal(event);
     }
+
+    openModal(event){
+        console.log(event)
+    }
+
     hoverOver(hour){
         $(`.time[data-hour=${hour}]`).addClass('currentTime');
     }

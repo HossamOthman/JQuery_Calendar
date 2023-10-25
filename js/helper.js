@@ -8,3 +8,7 @@ export function getDayIndex(date) {
     const falseIndex = date.getDay();
     return falseIndex == 0 ? 6 : falseIndex -1 ;
 }
+
+export function dateString(date){
+    return `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+}
