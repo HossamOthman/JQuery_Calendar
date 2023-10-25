@@ -1,4 +1,5 @@
 import { getDayIndex, addDays, dateString } from "./helper.js";
+import {Event} from './Event.js';
 
 const MODE = {
     VIEW: 1,
@@ -65,9 +66,9 @@ const MODE = {
         const start = hour.toString().padStart(2, '0') + ':00';
         const end = hour < 23 ? (hour+1).toString().padStart(2, '0') + ':00' : '23:59' ;
         const date = dateString(addDays(this.weekStart, dayIndex));
-        const event = {
+        const event = new Event ({
             start, end, date, title: '', description: '', color: 'red'
-        };
+        });
         this.openModal(event);
     }
 
@@ -99,8 +100,8 @@ const MODE = {
         $('#calendar').addClass('opaque');
         $('#eventModal').submit((e) => {
             e.preventDefault();
-            // to do
-            console.log('submit event', event)
+            
+            this.submitModal(event)
         })
     };
 
@@ -110,6 +111,13 @@ const MODE = {
         $('#errors').text('');
         $('#calendar').removeClass('opaque');
         this.mode = MODE.VIEW;
+    }
+
+    submitModal(event) {
+        if (event.isValidIn(this)){
+            event.updateIn(this);
+            this.closeModal();
+        }
     }
 
     hoverOver(hour){
