@@ -128,7 +128,8 @@ textarea {
 
 .day.currentDay .columnHeader {
     background: var(--slot-hover-color);
-    color: var(--color-red)
+    color: var(--color-red);
+    font-weight: 600;
 }
 
 .dayDisplay {
@@ -189,18 +190,18 @@ textarea {
 /* event modal */
 
 #eventModal {
-    display: none;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px var(--shadow-color);
+    display: block;
+    position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    z-index: 10;
     padding: 20px;
     width: 450px;
     min-width: 250px;
+    z-index: 10;
+    background-color: rgb(206, 202, 196);
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px var(--shadow-color);
+    transform: translate(-50%, -50%);
 }
 
 #errors {
@@ -209,17 +210,20 @@ textarea {
 
 #modalTitle {
     margin-bottom: 20px;
+    color:#333
 }
 
 #eventModal label {
     font-weight: bold;
     display: inline-block;
     margin: 20px 10px 5px 0px;
+    color:#333
 }
 
 .shortInput {
     border-bottom: 1px solid var(--grid-color);
     padding: 2px 1px;
+    background-color: whitesmoke;
 }
 
 .shortInput:focus {
@@ -245,6 +249,7 @@ textarea {
     min-height: 40px;
     resize: vertical;
     padding: 4px;
+    background-color: whitesmoke;
 }
 
 #eventDescription:focus {
@@ -258,7 +263,7 @@ textarea {
 .button {
     padding: 10px 20px;
     background-color: var(--color-blue);
-    color: white;
+    color: whitesmoke;
     cursor: pointer;
     margin-right: 12px;
     border-radius: 2px;
@@ -286,8 +291,8 @@ textarea {
 .color {
     width: 20px !important;
     height: 20px !important;
-    border-radius: 50%;
-    border: 5px solid white;
+    border-radius: 5px;
+    border: 3px solid whitesmoke;
     box-sizing: content-box;
     cursor: pointer;
 }
@@ -295,7 +300,7 @@ textarea {
 .color.active,
 .color:focus,
 .color:hover {
-    border: 5px solid var(--grid-color);
+    border: 3px solid antiquewhite;
 }
 
 .color-red {

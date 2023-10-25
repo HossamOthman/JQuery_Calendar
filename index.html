@@ -44,5 +44,49 @@
         </section>
     </main>
     
+    <form id="eventModal">
+        <h2 id="modalTitle">
+        </h2>
+        <label class="descriptor" for="title">Title</label>
+        <div>
+            <input required type="text" id="eventTitle" name="title" class="shortInput"></input>
+        </div>
+        <label class="descriptor" for="date">Date</label>
+        <div>
+            <input required type="date" id="eventDate" name="date" class="shortInput"></input>
+        </div>
+        <label class="descriptor" for="time">Time</label>
+        <div>
+            <input required type="time" id="eventStart" name="time" class="shortInput"></input>
+            ‒<input required type="time" id="eventEnd" name="time" class="shortInput"></input>
+        </div>
+        
+        <label for="description">
+            Description
+        </label>
+        <div>
+            <textarea id="eventDescription" name="description">
+            </textarea>
+        </div>        
+        <label for="color">
+            Color
+        </label>
+        <div id="colors">
+            <input type="button" name="color" value="" class="color color-red" data-color = "red"></input>
+            <input type="button" name="color" value="" class="color color-blue" data-color = "blue"></input>
+            <input type="button" name="color" value="" class="color color-green" data-color = "green"></input>
+            <input type="button" name="color" value="" class="color color-orange" data-color = "orange"></input>
+        </div>      
+        <div id="eventControls">
+            <input type="submit" value="Submit" class="button" id="submitButton">
+            <input type="button" value="Cancel" class="button" id="cancelButton">
+            <input type="button" value="Copy" class="button" id="copyButton">
+            <input type="button" value="Delete" class="button" id="deleteButton">
+        </div>
+        
+        <div id="errors">    
+        </div>
+        
+    </form>
 </body>
 </html>
