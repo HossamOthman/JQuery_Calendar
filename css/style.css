@@ -301,7 +301,7 @@ textarea {
 .color.active,
 .color:focus,
 .color:hover {
-    border: 3px solid antiquewhite;
+    border: 5px solid antiquewhite;
 }
 
 .color-red {

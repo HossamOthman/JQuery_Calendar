@@ -72,8 +72,38 @@ const MODE = {
     }
 
     openModal(event){
-        console.log(event)
-    }
+        $('#modalTitle').text(this.mode == MODE.CREATE ? 'Create New Event' : 'Update your Event');
+        $('#eventTitle').val(event.title);
+        $('#eventDate').val(event.date);
+        $('#eventStart').val(event.start);
+        $('#eventEnd').val(event.end);
+        $('#eventDescription').val(event.description);
+        $('.color').removeClass('active');
+        $(`.color[data-color=${event.color}]`).addClass('active');
+        if (this.mode ==  MODE.UPDATE) {
+            $('#submitButton').val('update');
+            $('#deleteButton').show().click(() => {
+                // to do
+                console.log('delete event:', event);
+            });
+            $('copyButton').show().click(() => {
+                // to do
+                console.log('copy event:', event);
+            })
+        } else if (this.mode ==  MODE.CREATE) {
+            $('#submitButton').val('Create');
+            $('#deleteButton, #copyButton').hide();
+        }
+        $('#eventModal').fadeIn(200);
+        $('#eventTitle').focus();
+        $('#calendar').addClass('opaque');
+        $('#eventModal').submit((e) => {
+            e.preventDefault();
+            // to do
+            console.log('submit event', event)
+        })
+    };
+
 
     hoverOver(hour){
         $(`.time[data-hour=${hour}]`).addClass('currentTime');
