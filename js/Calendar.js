@@ -13,6 +13,7 @@ const MODE = {
         this.weekEnd = null;
         this.weekOffset = 0;
         this.mode = MODE.VIEW;
+        this.events = {};
     }
 
     setup() {
@@ -83,11 +84,15 @@ const MODE = {
         $(`.color[data-color=${event.color}]`).addClass('active');
         if (this.mode ==  MODE.UPDATE) {
             $('#submitButton').val('update');
-            $('#deleteButton').show().click(() => {
+            $('#deleteButton').show()
+                .off('click')
+                .click(() => {
                 // to do
                 console.log('delete event:', event);
             });
-            $('copyButton').show().click(() => {
+            $('copyButton').show()
+                .off('click')
+                .click(() => {
                 // to do
                 console.log('copy event:', event);
             })
@@ -98,7 +103,9 @@ const MODE = {
         $('#eventModal').fadeIn(200);
         $('#eventTitle').focus();
         $('#calendar').addClass('opaque');
-        $('#eventModal').submit((e) => {
+        $('#eventModal')
+            .off('submit')
+            .submit((e) => {
             e.preventDefault();
             
             this.submitModal(event)
