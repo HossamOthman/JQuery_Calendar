@@ -192,4 +192,8 @@ const MODE = {
     hideCurrentDay() {
         $('.day').removeClass('currentDay');
     }
+
+    saveEvents() {
+        localStorage.setItem('JQCalendar.events', JSON.stringify(this.events)); 
+    }
  }

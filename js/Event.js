@@ -103,6 +103,6 @@ export class Event {
             calendar.events[this.date] = {};
         }
         calendar.events[this.date][this.id] = this;
-        console.log(calendar.events)
+        calendar.saveEvents();
     }
 }
