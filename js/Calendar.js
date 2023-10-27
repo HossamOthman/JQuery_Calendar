@@ -14,6 +14,7 @@ const MODE = {
         this.weekOffset = 0;
         this.mode = MODE.VIEW;
         this.events = {};
+        this.slotHeight = 30;
     }
 
     setup() {

@@ -1,4 +1,4 @@
-import {generateId} from './helper.js';
+import {dateString, generateId, getDayIndex} from './helper.js';
 
 export class Event {
     constructor(data) {
@@ -10,6 +10,26 @@ export class Event {
         this.date = data.date;
         this.description = data.description;
         this.color = data.color;
+    }
+
+    get dayIndex() {
+        return getDayIndex(new Date(this.date));
+    }
+
+    get startHour(){
+        return parseInt(this.start.substring(0,2));
+    }
+
+    get endHour(){
+        return parseInt(this.end.substring(0,2));
+    }
+
+    get startMinutes(){
+        return parseInt(this.start.substring(3,5));
+    }
+
+    get endMinutes(){
+        return parseInt(this.end.substring(3,5));
     }
 
     isValidIn(calendar) {
@@ -51,7 +71,25 @@ export class Event {
     }
 
     showIn(calendar){
-        console.log('show event', this);
+        if (this.date < dateString(calendar.weekStart) || this.date > dateString(calendar.weekEnd)) {
+            $(`#${this.id}`).remove();
+            return;
+        }
+        let eventSlot;
+        const h = calendar.slotHeight;
+
+        if($(`#${this.id}`).length) {
+            eventSlot = $(`#${this.id}`);
+        } else {
+            eventSlot = $('<div></div>')
+                .attr('id', this.id)
+                .addClass('event')
+        }
+        eventSlot.text(this.title)
+        .css('backgroundColor', `var(--color-${this.color})`)
+        .css('top', (this.startHour + this.startMinutes/60) * h + 2 + 'px')
+        .css('bottom', 24 * h - (this.endHour + this.endMinutes/60) * h + 1 + 'px')
+        .appendTo(`.day[data-dayIndex=${this.dayIndex}] .slots`);;
     }
 
     saveIn(calendar){
