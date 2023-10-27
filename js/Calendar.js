@@ -15,6 +15,7 @@ const MODE = {
         this.mode = MODE.VIEW;
         this.events = {};
         this.slotHeight = 30;
+        this.eventsLoaded = false;
     }
 
     setup() {
@@ -23,6 +24,7 @@ const MODE = {
         this.calculateCurrentWeek();
         this.showWeek();
         this.setupControls();
+        this.loadEvents();
     }
 
     setupTimes() {
@@ -181,6 +183,7 @@ const MODE = {
         this.weekStart = addDays(this.weekStart, 7 * number);
         this.weekEnd = addDays(this.weekStart, 7 * number);
         this.showWeek();
+        this.loadEvents();
     }
 
     showCurrentDay() {
@@ -195,5 +198,33 @@ const MODE = {
 
     saveEvents() {
         localStorage.setItem('JQCalendar.events', JSON.stringify(this.events)); 
+    }
+
+    loadEvents() {
+        $('.event').remove();
+        if(!this.eventsLoaded) {
+            this.events = JSON.parse(localStorage.getItem('JQCalendar.events'));
+            if(this.events) {
+                for (const date of Object.keys(this.events)) {
+                    for (const id of Object.keys(this.events[date])) {
+                        const event = new Event(this.events[date][id]);
+                        this.events[date][id] = event;
+                    }
+                }
+            }
+            this.eventsLoaded = true;
+        }
+        if (this.events) {
+            for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+                const date = dateString(addDays(this.weekStart, dayIndex));
+                if (this.events[date]) {
+                    for (const event of Object.values(this.events[date])) {
+                        event.showIn(this)
+                    }
+                }
+            }
+        } else {
+            this.events = {};
+        }
     }
  }
