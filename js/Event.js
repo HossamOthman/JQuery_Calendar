@@ -89,7 +89,17 @@ export class Event {
         .css('backgroundColor', `var(--color-${this.color})`)
         .css('top', (this.startHour + this.startMinutes/60) * h + 2 + 'px')
         .css('bottom', 24 * h - (this.endHour + this.endMinutes/60) * h + 1 + 'px')
-        .appendTo(`.day[data-dayIndex=${this.dayIndex}] .slots`);;
+        .appendTo(`.day[data-dayIndex=${this.dayIndex}] .slots`);
+
+        const duration = (new Date(`${this.date}T${this.end}`).getTime() -
+                        new Date(`${this.date}T${this.start}`).getTime())/(1000*60);
+                        if (duration < 45 ) {
+                            eventSlot.addClass('veryShortEvent').removeClass('shortEvent');
+                        } else if (duration < 60) {
+                            eventSlot.addClass('shortEvent').removeClass('veryShortEvent');
+                        } else {
+                            eventSlot.removeClass('shortEvent').removeClass('veryShortEvent');
+                        }
     }
 
     saveIn(calendar){
