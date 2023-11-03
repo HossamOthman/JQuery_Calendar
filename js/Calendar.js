@@ -11,6 +11,7 @@ import {Event, MODE} from './Event.js';
         this.events = {};
         this.slotHeight = 30;
         this.eventsLoaded = false;
+        this.readyToTrash = false;
     }
 
     setup() {
@@ -166,6 +167,8 @@ import {Event, MODE} from './Event.js';
         $('#prevWeekBtn').click(() => this.changeWeek(-1));
         $('#cancelButton').click(() => this.closeModal());
         $('.color').click(this.changeColor);
+        $('#trashBtn').click(() => this.trash());
+        $('#addBtn').click(() => this.addNewEvent())
     }
 
     changeColor() {
@@ -221,5 +224,36 @@ import {Event, MODE} from './Event.js';
         } else {
             this.events = {};
         }
+    }
+
+    trash() {
+        if(this.mode != MODE.VIEW) return;
+        if(this.readyToTrash) {
+            this.readyToTrash = false;
+            this.events = {};
+            this.saveEvents();
+            $('.event').remove();
+        } else {
+            this.readyToTrash = true;
+            window.alert('This will delete all events, Are you sure? ' +
+            'This cannot be undone. if you are sure ' +
+            'Click DELETE again in the next minute');
+            setTimeout(() => {
+                this.readyToTrash = false;
+            }, 1000*60)
+        }
+    }
+    addNewEvent(){
+        if(this.mode != MODE.VIEW) return;
+        this.mode = MODE.CREATE;
+        const event = new Event({
+            start: '12:00',
+            end: '13:00',
+            date: dateString(this.weekStart),
+            title: '',
+            description: '',
+            color: 'red'
+        });
+        this.openModal(event);
     }
  }
