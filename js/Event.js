@@ -1,13 +1,19 @@
 import {dateString, generateId, getDayIndex} from './helper.js';
 
+export const MODE = {
+    VIEW:   1,
+    UPDATE: 2,
+    CREATE: 3,
+    };
+
 export class Event {
     constructor(data) {
         this.id = data.id || generateId();
         this.title = data.title;
         this.start = data.start;
         this.end = data.end;
-        this.prevDate = data.date;
         this.date = data.date;
+        this.prevDate = this.date;
         this.description = data.description;
         this.color = data.color;
     }
@@ -37,7 +43,7 @@ export class Event {
         const newEnd = $("#eventEnd").val();
         const newDate = $("#eventDate").val();
         if(calendar.events[newDate]){
-            const event = object.values(calendar.events[newDate]).find(event => {
+            const event = Object.values(calendar.events[newDate]).find(event => {
                 event.id != this.id && event.end > newStart && event.start < newEnd 
             });
             if (event) {
@@ -57,6 +63,19 @@ export class Event {
         return true;
     }
 
+    clickIn(calendar) {
+        if (calendar.mode != MODE.VIEW) return;
+        calendar.mode = MODE.UPDATE;
+        calendar.openModal(this);
+    }
+
+    // clickIn(calendar) {
+    //     if (calendar.mode != MODE.VIEW) {
+    //         calendar.mode = MODE.UPDATE;
+    //         calendar.openModal(this);
+    //     }
+    // }
+    
     updateIn(calendar) {
         this.prevDate = this.date;
         this.title = $("#eventTitle").val();
@@ -66,8 +85,8 @@ export class Event {
         this.date = $("#eventDate").val();
         this.description = $("#eventDescription").val();
         this.color = $(".color.active").attr('data-color');
-        this.showIn(calendar);
         this.saveIn(calendar);
+        this.showIn(calendar);
     }
 
     showIn(calendar){
@@ -84,6 +103,7 @@ export class Event {
             eventSlot = $('<div></div>')
                 .attr('id', this.id)
                 .addClass('event')
+                .click(() => this.clickIn(calendar));
         }
         eventSlot.text(this.title)
         .css('backgroundColor', `var(--color-${this.color})`)

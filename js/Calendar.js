@@ -1,11 +1,6 @@
 import { getDayIndex, addDays, dateString } from "./helper.js";
-import {Event} from './Event.js';
+import {Event, MODE} from './Event.js';
 
-const MODE = {
-    VIEW: 1,
-    UPDATE: 2,
-    CREATE: 3,
-    };
 
  export class Calendar {
     constructor() {
@@ -77,7 +72,7 @@ const MODE = {
     }
 
     openModal(event){
-        $('#modalTitle').text(this.mode == MODE.CREATE ? 'Create New Event' : 'Update your Event');
+        $('#modalTitle').text(this.mode == MODE.UPDATE ? 'Update your Event' :'Create New Event' );
         $('#eventTitle').val(event.title);
         $('#eventDate').val(event.date);
         $('#eventStart').val(event.start);
@@ -86,7 +81,7 @@ const MODE = {
         $('.color').removeClass('active');
         $(`.color[data-color=${event.color}]`).addClass('active');
         if (this.mode ==  MODE.UPDATE) {
-            $('#submitButton').val('update');
+            $('#submitButton').val('Update');
             $('#deleteButton').show()
                 .off('click')
                 .click(() => {
