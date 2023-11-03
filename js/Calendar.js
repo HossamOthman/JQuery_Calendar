@@ -85,14 +85,14 @@ import {Event, MODE} from './Event.js';
             $('#deleteButton').show()
                 .off('click')
                 .click(() => {
-                // to do
-                console.log('delete event:', event);
+                
+                event.deleteIn(this);
             });
-            $('copyButton').show()
+            $('#copyButton').show()
                 .off('click')
                 .click(() => {
-                // to do
-                console.log('copy event:', event);
+                
+                event.copyIn(this);
             })
         } else if (this.mode ==  MODE.CREATE) {
             $('#submitButton').val('Create');

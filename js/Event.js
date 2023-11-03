@@ -43,9 +43,9 @@ export class Event {
         const newEnd = $("#eventEnd").val();
         const newDate = $("#eventDate").val();
         if(calendar.events[newDate]){
-            const event = Object.values(calendar.events[newDate]).find(event => {
+            const event = Object.values(calendar.events[newDate]).find(event => 
                 event.id != this.id && event.end > newStart && event.start < newEnd 
-            });
+            );
             if (event) {
                 $('#errors').text(`This Collides with the event ${event.title}: (${event.start} - ${event.end}).`);
                 return false;
@@ -134,5 +134,32 @@ export class Event {
         }
         calendar.events[this.date][this.id] = this;
         calendar.saveEvents();
+    }
+
+    deleteIn(calendar) {
+        calendar.closeModal();
+        $(`#${this.id}`).remove();
+        delete calendar.events[this.date][this.id];
+        if(Object.values(calendar.events[this.date]).length == 0) {
+            delete calendar.events[this.date];
+        }
+        calendar.saveEvents();
+
+    }
+
+    copyIn(calendar) {
+        if (calendar.mode != MODE.UPDATE ) return;
+        calendar.closeModal();
+        calendar.mode = MODE.CREATE;
+
+        const copy = new Event({
+            title: 'Copy Of ' + this.title,
+            start: this.start,
+            end: this.end,
+            date: this.date,
+            description: this.description,
+            color: this.color
+        });
+        calendar.openModal(copy);
     }
 }
